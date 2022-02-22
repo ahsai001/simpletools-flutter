@@ -158,10 +158,10 @@ class _GridItemState extends State<GridItem> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (() {
+      onTap: () {
         print("hallo ${widget.title}");
         widget.onTap();
-      }),
+      },
       child: Container(
         color: Colors.green,
         child: Column(

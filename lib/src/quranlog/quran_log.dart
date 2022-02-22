@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class QuranLog extends StatefulWidget {
   const QuranLog({Key? key}) : super(key: key);
@@ -154,9 +155,9 @@ class _QuranLogState extends State<QuranLog> {
                               title: Text(
                                   "${data["surat"]} ${data["ayat"].toString()}"),
                               subtitle: data["_created_at"] != null
-                                  ? Text((data["_created_at"] as Timestamp)
-                                      .toDate()
-                                      .toIso8601String())
+                                  ? Text(DateFormat("d MMMM yyyy hh:mm:ss")
+                                      .format((data["_created_at"] as Timestamp)
+                                          .toDate()))
                                   : const Text("date empty"),
                             ),
                           ),
