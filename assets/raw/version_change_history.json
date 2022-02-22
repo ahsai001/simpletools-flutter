@@ -1,0 +1,18 @@
+[
+    {
+        "item": "1.3.6.20",
+        "description": "- add feature login with email/password or google\n- open qur'an directly from log"
+    },{
+        "item": "version 1.2.4.7",
+        "description": "- bug fixing : change app name for device with indonesia language"
+    },{
+        "item": "version 1.2.3.6",
+        "description": "- bug fixing\n- add qur'an log reading graphics"
+    },{
+        "item": "version 1.1.2.3",
+        "description": "- bug fixing\n- add feature link click to chat wa"
+    },{
+        "item": "version 1.0.1.0",
+        "description": "- initial"
+    }
+]
