@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:device_apps/device_apps.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:simpletools/src/login/login.dart';
 import 'package:simpletools/src/quranlog/quran_log.dart';
@@ -130,14 +134,22 @@ class _HomeState extends State<Home> {
               title: "Dzikir Pagi",
               icon: Icons.send,
               onTap: () {
-                _launchUrl("https://dzikirpagi.zaitunlabs.com");
+                if (kIsWeb) {
+                  _launchUrl("https://dzikirpagi.zaitunlabs.com");
+                } else if (Platform.isAndroid) {
+                  _launchApp();
+                }
               },
             ),
             GridItem(
               title: "Dzikir Petang",
               icon: Icons.send,
-              onTap: () {
-                _launchUrl("https://dzikirpetang.zaitunlabs.com");
+              onTap: () async {
+                if (kIsWeb) {
+                  _launchUrl("https://dzikirpetang.zaitunlabs.com");
+                } else if (Platform.isAndroid) {
+                  _launchApp();
+                }
               },
             ),
             GridItem(
@@ -160,6 +172,10 @@ class _HomeState extends State<Home> {
     if (!await launchUrl(Uri.parse(url))) {
       throw 'Gagal luncurkan $url';
     }
+  }
+
+  Future<void> _launchApp() async {
+    DeviceApps.openApp("com.zaitunlabs.dzikirharian");
   }
 }
 
