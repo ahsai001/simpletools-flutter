@@ -80,7 +80,7 @@ class _QuranLogState extends State<QuranLog> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Qur'an Log"),
+        title: const Text("Bookmark Al Qur'an"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

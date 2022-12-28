@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:simpletools/src/login/login.dart';
 import 'package:simpletools/src/quranlog/quran_log.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -86,15 +87,10 @@ class _HomeState extends State<Home> {
         padding: const EdgeInsets.all(8.0),
         child: GridView(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, crossAxisSpacing: 5.0, mainAxisSpacing: 5.0),
+              crossAxisCount: 3, crossAxisSpacing: 5.0, mainAxisSpacing: 5.0),
           children: [
             GridItem(
-              title: "Chat wa to unsaved number",
-              icon: Icons.send,
-              onTap: () {},
-            ),
-            GridItem(
-              title: "Quran log",
+              title: "Bookmark Al Qur'an",
               icon: Icons.send,
               onTap: () async {
                 if (firebaseUser == null) {
@@ -102,20 +98,20 @@ class _HomeState extends State<Home> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: const Text("Login required"),
+                          title: const Text("Perlu masuk"),
                           content: const Text(
-                              "Please login to continue using this feature"),
+                              "Silakan masuk untuk menggunakan fitur ini"),
                           actions: [
                             TextButton(
                                 onPressed: () {
                                   Navigator.pop(context, true);
                                 },
-                                child: const Text("Login")),
+                                child: const Text("Masuk")),
                             TextButton(
                                 onPressed: () {
                                   Navigator.pop(context, false);
                                 },
-                                child: const Text("Cancel")),
+                                child: const Text("Batal")),
                           ],
                         );
                       });
@@ -131,7 +127,26 @@ class _HomeState extends State<Home> {
               },
             ),
             GridItem(
-              title: "Create link to chat wa",
+              title: "Dzikir Pagi",
+              icon: Icons.send,
+              onTap: () {
+                _launchUrl("https://dzikirpagi.zaitunlabs.com");
+              },
+            ),
+            GridItem(
+              title: "Dzikir Petang",
+              icon: Icons.send,
+              onTap: () {
+                _launchUrl("https://dzikirpetang.zaitunlabs.com");
+              },
+            ),
+            GridItem(
+              title: "Chat wa ke nomor tertentu",
+              icon: Icons.send,
+              onTap: () {},
+            ),
+            GridItem(
+              title: "Buat link cepat untuk kirim wa",
               icon: Icons.send,
               onTap: () {},
             ),
@@ -139,6 +154,12 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+
+  Future<void> _launchUrl(String url) async {
+    if (!await launchUrl(Uri.parse(url))) {
+      throw 'Gagal luncurkan $url';
+    }
   }
 }
 

@@ -23,12 +23,12 @@ class _RegisterState extends State<Register> {
           child: BlocConsumer<RegisterBloc, RegisterState>(
             listener: ((context, state) {
               if (state is RegisterSuccess) {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(const SnackBar(content: Text("sukses")));
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Daftar sukses")));
                 Navigator.pop(context, true);
               } else if (state is RegisterError) {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(const SnackBar(content: Text("gagal")));
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Daftar gagal")));
               }
             }),
             builder: (context, state) {
@@ -83,7 +83,7 @@ class _RegisterState extends State<Register> {
                                     .read<RegisterBloc>()
                                     .add(RegisterSubmitted());
                               },
-                              child: const Text("Register"));
+                              child: const Text("Daftar"));
                         }
                       },
                     )

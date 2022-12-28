@@ -24,12 +24,12 @@ class _LoginState extends State<Login> {
           child: BlocConsumer<LoginBloc, LoginState>(
             listener: ((context, state) {
               if (state is LoginSuccess) {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(const SnackBar(content: Text("sukses")));
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Masuk sukses")));
                 Navigator.pop(context, true);
               } else if (state is LoginError) {
                 ScaffoldMessenger.of(context)
-                    .showSnackBar(const SnackBar(content: Text("gagal")));
+                    .showSnackBar(const SnackBar(content: Text("Masuk gagal")));
               }
             }),
             builder: (context, state) {
