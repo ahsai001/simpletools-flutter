@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:js' as js;
 
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -241,9 +242,7 @@ class _QuranLogState extends State<QuranLog> {
   Future _openQuran(int nomor, int ayat) async {
     if (kIsWeb) {
       //open web
-      // js.context.callMethod('open', [
-      //   "https://beta.quran.com/$nomor?startingVerse=$ayat"
-      // ]);
+      js.context.callMethod('open', ["https://beta.quran.com/$nomor/$ayat"]);
     } else {
       if (Platform.isAndroid) {
         AndroidIntent intent = AndroidIntent(
@@ -253,9 +252,7 @@ class _QuranLogState extends State<QuranLog> {
         );
         await intent.launch();
       } else {
-        // js.context.callMethod('open', [
-        //   "https://beta.quran.com/$nomor?startingVerse=$ayat"
-        // ]);
+        js.context.callMethod('open', ["https://beta.quran.com/$nomor/$ayat"]);
       }
     }
   }
