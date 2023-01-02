@@ -91,7 +91,10 @@ class _HomeState extends State<Home> {
         padding: const EdgeInsets.all(8.0),
         child: GridView(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3, crossAxisSpacing: 5.0, mainAxisSpacing: 5.0),
+              childAspectRatio: 0.65,
+              crossAxisCount: 3,
+              crossAxisSpacing: 5.0,
+              mainAxisSpacing: 5.0),
           children: [
             GridItem(
               title: "Bookmark Al Qur'an",
