@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:device_apps/device_apps.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -137,22 +135,14 @@ class _HomeState extends State<Home> {
               title: "Dzikir Pagi",
               icon: Icons.send,
               onTap: () {
-                if (kIsWeb) {
-                  _launchUrl("https://dzikirpagi.zaitunlabs.com");
-                } else if (Platform.isAndroid) {
-                  _launchApp();
-                }
+                _launchUrl("https://dzikirpagi.zaitunlabs.com");
               },
             ),
             GridItem(
               title: "Dzikir Petang",
               icon: Icons.send,
               onTap: () async {
-                if (kIsWeb) {
-                  _launchUrl("https://dzikirpetang.zaitunlabs.com");
-                } else if (Platform.isAndroid) {
-                  _launchApp();
-                }
+                _launchUrl("https://dzikirpetang.zaitunlabs.com");
               },
             ),
             GridItem(
@@ -172,7 +162,8 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> _launchUrl(String url) async {
-    if (!await launchUrl(Uri.parse(url))) {
+    if (!await launchUrl(Uri.parse(url),
+        mode: LaunchMode.externalApplication)) {
       throw 'Gagal luncurkan $url';
     }
   }

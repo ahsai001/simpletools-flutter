@@ -112,6 +112,7 @@ class _QuranLogState extends State<QuranLog> {
                 }
               },
             ),
+            
             ElevatedButton(
                 onPressed: () {
                   if (_ayat <= 0) {
