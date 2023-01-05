@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simpletools/src/login/bloc/login_bloc.dart';
 import 'package:simpletools/src/register/register.dart';
+import 'package:simpletools/src/widget/custom_padding.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -19,8 +20,7 @@ class _LoginState extends State<Login> {
       ),
       body: BlocProvider<LoginBloc>(
         create: (context) => LoginBloc(),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
+        child: CustomPadding(
           child: BlocConsumer<LoginBloc, LoginState>(
             listener: ((context, state) {
               if (state is LoginSuccess) {

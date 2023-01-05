@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:simpletools/src/login/login.dart';
 import 'package:simpletools/src/quranlog/quran_log.dart';
+import 'package:simpletools/src/widget/custom_padding.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
@@ -85,8 +86,7 @@ class _HomeState extends State<Home> {
             },
             icon: Icon(firebaseUser != null ? Icons.logout : Icons.login))
       ]),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
+      body: CustomPadding(
         child: GridView(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               childAspectRatio: 0.65,

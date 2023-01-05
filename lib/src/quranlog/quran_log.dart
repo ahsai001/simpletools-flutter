@@ -10,6 +10,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:simpletools/src/util/widget_util.dart';
+import 'package:simpletools/src/widget/custom_padding.dart';
 
 class QuranLog extends StatefulWidget {
   const QuranLog({Key? key}) : super(key: key);
@@ -68,6 +70,7 @@ class _QuranLogState extends State<QuranLog> {
         .then((value) {
       setState(() {
         _nomor = value.docs[0]["nomor"];
+        _ayat = value.docs[0]["ayat"];
       });
       _ayatController.text = value.docs[0]["ayat"].toString();
     });
@@ -84,53 +87,68 @@ class _QuranLogState extends State<QuranLog> {
       appBar: AppBar(
         title: const Text("Bookmark Al Qur'an"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
+      body: CustomPadding(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            DropdownButton<int>(
-                value: _nomor,
-                hint: const Text("Pilih surat"),
-                items: _quranInfo.map((List<dynamic> item) {
-                  return DropdownMenuItem<int>(
-                      value: item[0] as int,
-                      child: Text("${item[0].toString()} ${item[1]}"));
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _nomor = value!;
-                  });
-                }),
-            TextField(
-              controller: _ayatController,
-              keyboardType: TextInputType.number,
-              onChanged: (value) {
-                if (value.isNotEmpty) {
-                  _ayat = int.parse(value);
-                } else {
-                  _ayat = 0;
-                }
-              },
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: const BorderRadius.all(Radius.circular(10.0))),
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  DropdownButton<int>(
+                      value: _nomor,
+                      hint: const Text("Pilih surat"),
+                      items: _quranInfo.map((List<dynamic> item) {
+                        return DropdownMenuItem<int>(
+                            value: item[0] as int,
+                            child: Text("${item[0].toString()} ${item[1]}"));
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          _nomor = value!;
+                        });
+                      }),
+                  TextField(
+                    controller: _ayatController,
+                    decoration:
+                        const InputDecoration(hintText: "Masukan nomor ayat"),
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      if (value.isNotEmpty) {
+                        _ayat = int.parse(value);
+                      } else {
+                        _ayat = 0;
+                      }
+                    },
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        if (_ayat <= 0) {
+                          _showInfo("ayat tidak boleh kosong");
+                          return;
+                        }
+                        _collectionRef?.add({
+                          "ayat": _ayat,
+                          "surat": "$_nomor ${_quranInfo[_nomor - 1][1]}",
+                          "nomor": _nomor,
+                          "_created_at": DateTime.now()
+                        }).then((value) {
+                          print("sukses tambah catatan");
+                        }).catchError((error) {
+                          print("gagal tambah catatan : $error");
+                        });
+                      },
+                      child: const Text("Tambah catatan")),
+                ],
+              ),
             ),
-            
-            ElevatedButton(
-                onPressed: () {
-                  if (_ayat <= 0) {
-                    _showInfo("ayat tidak boleh kosong");
-                    return;
-                  }
-                  _collectionRef?.add({
-                    "ayat": _ayat,
-                    "surat": "$_nomor ${_quranInfo[_nomor - 1][1]}",
-                    "nomor": _nomor,
-                    "_created_at": DateTime.now()
-                  }).then((value) {
-                    print("sukses tambah log");
-                  }).catchError((error) {
-                    print("gagal tambah log : $error");
-                  });
-                },
-                child: const Text("Tambah log")),
+            spaceH(),
+            const Text(
+              "List catatan terakhir :",
+            ),
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
                   stream: _stream,

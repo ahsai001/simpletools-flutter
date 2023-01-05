@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simpletools/src/register/bloc/register_bloc.dart';
+import 'package:simpletools/src/widget/custom_padding.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -18,8 +19,7 @@ class _RegisterState extends State<Register> {
       ),
       body: BlocProvider<RegisterBloc>(
         create: (context) => RegisterBloc(),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
+        child: CustomPadding(
           child: BlocConsumer<RegisterBloc, RegisterState>(
             listener: ((context, state) {
               if (state is RegisterSuccess) {
