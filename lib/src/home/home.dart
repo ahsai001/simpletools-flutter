@@ -1,6 +1,5 @@
 import 'package:device_apps/device_apps.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:simpletools/src/login/login.dart';
 import 'package:simpletools/src/quranlog/quran_log.dart';
@@ -145,16 +144,16 @@ class _HomeState extends State<Home> {
                 _launchUrl("https://dzikirpetang.zaitunlabs.com");
               },
             ),
-            GridItem(
-              title: "Chat wa ke nomor tertentu",
-              icon: Icons.send,
-              onTap: () {},
-            ),
-            GridItem(
-              title: "Buat link cepat untuk kirim wa",
-              icon: Icons.send,
-              onTap: () {},
-            ),
+            // GridItem(
+            //   title: "Chat wa ke nomor tertentu",
+            //   icon: Icons.send,
+            //   onTap: () {},
+            // ),
+            // GridItem(
+            //   title: "Buat link cepat untuk kirim wa",
+            //   icon: Icons.send,
+            //   onTap: () {},
+            // ),
           ],
         ),
       ),
