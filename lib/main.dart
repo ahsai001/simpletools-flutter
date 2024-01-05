@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Simple Tools',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        useMaterial3: false,
         primarySwatch: Colors.blue,
       ),
       home: const Home(),

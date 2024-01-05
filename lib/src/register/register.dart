@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_alcore/flutter_alcore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simpletools/src/register/bloc/register_bloc.dart';
-import 'package:simpletools/src/widget/custom_padding.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);

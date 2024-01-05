@@ -1,9 +1,9 @@
 import 'package:device_apps/device_apps.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:simpletools/src/login/login.dart';
+import 'package:flutter_alcore/flutter_alcore.dart';
 import 'package:simpletools/src/quranlog/quran_log.dart';
-import 'package:simpletools/src/widget/custom_padding.dart';
+import 'package:simpletools/src/util/widget_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
@@ -31,56 +31,20 @@ class _HomeState extends State<Home> {
     });
   }
 
-  _logout() async {
-    var isLogout = await showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text("Logout Confirmation"),
-            content: const Text("Are you sure?"),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context, false);
-                  },
-                  child: const Text("Cancel")),
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context, true);
-                  },
-                  child: const Text("Logout"))
-            ],
-          );
-        });
-    if (isLogout) {
-      await FirebaseAuth.instance.signOut();
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Logout berhasil")));
-      setState(() {});
-    }
-  }
-
-  _login() async {
-    final result =
-        await Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return const Login();
-    }));
-
-    if (result != null && result == true) {
-      setState(() {});
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Simple Tools"), actions: [
         IconButton(
-            onPressed: () {
+            onPressed: () async {
               if (firebaseUser != null) {
-                _logout();
+                if (await logout(context)) {
+                  setState(() {});
+                }
               } else {
-                _login();
+                if (await login(context)) {
+                  setState(() {});
+                }
               }
             },
             icon: Icon(firebaseUser != null ? Icons.logout : Icons.login))
@@ -97,51 +61,25 @@ class _HomeState extends State<Home> {
               title: "Bookmark Al Qur'an",
               icon: Icons.send,
               onTap: () async {
-                if (firebaseUser == null) {
-                  bool result = await showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text("Perlu masuk"),
-                          content: const Text(
-                              "Silakan masuk untuk menggunakan fitur ini"),
-                          actions: [
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                                child: const Text("Masuk")),
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context, false);
-                                },
-                                child: const Text("Batal")),
-                          ],
-                        );
-                      });
-                  if (result) {
-                    _login();
-                  }
-                } else {
-                  //go quran log
+                doingWithLogin(context, () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const QuranLog();
                   }));
-                }
+                });
               },
             ),
             GridItem(
               title: "Dzikir Pagi",
               icon: Icons.send,
               onTap: () {
-                _launchUrl("https://dzikirpagi.zaitunlabs.com");
+                _launchApp("https://ahsailabs.com/dzikirpagi/");
               },
             ),
             GridItem(
               title: "Dzikir Petang",
               icon: Icons.send,
               onTap: () async {
-                _launchUrl("https://dzikirpetang.zaitunlabs.com");
+                _launchApp("https://ahsailabs.com/dzikirpetang/");
               },
             ),
             // GridItem(
@@ -167,8 +105,10 @@ class _HomeState extends State<Home> {
     }
   }
 
-  Future<void> _launchApp() async {
-    DeviceApps.openApp("com.zaitunlabs.dzikirharian");
+  Future<void> _launchApp(String url) async {
+    if (!await DeviceApps.openApp("com.zaitunlabs.dzikirharian")) {
+      await _launchUrl(url);
+    }
   }
 }
 

@@ -9,9 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_alcore/flutter_alcore.dart';
 import 'package:intl/intl.dart';
-import 'package:simpletools/src/util/widget_util.dart';
-import 'package:simpletools/src/widget/custom_padding.dart';
 
 class QuranLog extends StatefulWidget {
   const QuranLog({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_alcore/flutter_alcore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simpletools/src/login/bloc/login_bloc.dart';
 import 'package:simpletools/src/register/register.dart';
-import 'package:simpletools/src/widget/custom_padding.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
