@@ -1,4 +1,3 @@
-import 'package:device_apps/device_apps.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_alcore/flutter_alcore.dart';
@@ -72,16 +71,42 @@ class _HomeState extends State<Home> {
               title: "Dzikir Pagi",
               icon: Icons.send,
               onTap: () {
-                _launchApp("https://ahsailabs.com/dzikirpagi/");
+                _launchApp("https://ahsailabs.com/dzikirpagi");
               },
             ),
             GridItem(
               title: "Dzikir Petang",
               icon: Icons.send,
               onTap: () async {
-                _launchApp("https://ahsailabs.com/dzikirpetang/");
+                _launchApp("https://ahsailabs.com/dzikirpetang");
               },
             ),
+            GridItem(
+              title: "Dzikir Subuh",
+              icon: Icons.send,
+              onTap: () async {
+                _launchApp("https://ahsailabs.com/dzikirsubuh");
+              },
+            ),
+            GridItem(
+              title: "Dzikir Maghrib",
+              icon: Icons.send,
+              onTap: () async {
+                _launchApp("https://ahsailabs.com/dzikirmaghrib");
+              },
+            ),
+            GridItem(
+              title: "Dzikir Zhuhur/Ashar/Isya",
+              icon: Icons.send,
+              onTap: () async {
+                _launchApp("https://ahsailabs.com/dzikirzhuhur");
+              },
+            ),
+            // GridItem(
+            //   title: "Coundown Timer",
+            //   icon: Icons.send,
+            //   onTap: () {},
+            // ),
             // GridItem(
             //   title: "Chat wa ke nomor tertentu",
             //   icon: Icons.send,
@@ -106,9 +131,15 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> _launchApp(String url) async {
-    if (!await DeviceApps.openApp("com.zaitunlabs.dzikirharian")) {
-      await _launchUrl(url);
-    }
+    await _launchUrl(url);
+    // if (await LaunchApp.openApp(
+    //         androidPackageName: 'com.zaitunlabs.dzikirharian') ==
+    //     0) {
+    //   await _launchUrl(url);
+    // }
+    // if (!await DeviceApps.openApp("com.zaitunlabs.dzikirharian")) {
+    //   await _launchUrl(url);
+    // }
   }
 }
 
