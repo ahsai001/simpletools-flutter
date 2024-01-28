@@ -56,6 +56,7 @@ dependencies:
   firebase_core: ^2.15.1
   firebase_auth: ^4.8.0
   cloud_firestore: ^4.9.0
+  flutter_timer_countdown: ^1.0.7
 
 dev_dependencies:
   flutter_test:

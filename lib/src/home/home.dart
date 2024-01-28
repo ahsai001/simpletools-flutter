@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_alcore/flutter_alcore.dart';
+import 'package:simpletools/src/countdown/countdown_page.dart';
 import 'package:simpletools/src/quranlog/quran_log.dart';
 import 'package:simpletools/src/util/widget_util.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -61,9 +62,8 @@ class _HomeState extends State<Home> {
               icon: Icons.send,
               onTap: () async {
                 doingWithLogin(context, () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const QuranLog();
-                  }));
+                  pushNewPageWithTransition(
+                      context, (context) => const QuranLog());
                 });
               },
             ),
@@ -102,11 +102,16 @@ class _HomeState extends State<Home> {
                 _launchApp("https://ahsailabs.com/dzikirzhuhur");
               },
             ),
-            // GridItem(
-            //   title: "Coundown Timer",
-            //   icon: Icons.send,
-            //   onTap: () {},
-            // ),
+            GridItem(
+              title: "Events in countdown",
+              icon: Icons.event,
+              onTap: () async {
+                doingWithLogin(context, () {
+                  pushNewPageWithTransition(
+                      context, (context) => const CountDownPage());
+                });
+              },
+            ),
             // GridItem(
             //   title: "Chat wa ke nomor tertentu",
             //   icon: Icons.send,

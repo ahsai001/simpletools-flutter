@@ -153,7 +153,9 @@ class _QuranLogState extends State<QuranLog> {
                   stream: _stream,
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
-                      return const Center(child: Text('Something went wrong'));
+                      return Center(
+                          child: Text(
+                              'Something went wrong : ${snapshot.error.toString()} '));
                     }
 
                     if (snapshot.connectionState == ConnectionState.waiting) {
@@ -184,8 +186,8 @@ class _QuranLogState extends State<QuranLog> {
                           background: Container(
                             padding: const EdgeInsets.only(left: 10.0),
                             color: Colors.red,
-                            child: Row(
-                              children: const [
+                            child: const Row(
+                              children: [
                                 Icon(
                                   Icons.delete,
                                   color: Colors.white,
