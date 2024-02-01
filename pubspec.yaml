@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.5.25+9
+version: 1.10.30+10
 
 environment:
   sdk: ">=2.16.0 <3.0.0"
@@ -38,7 +38,9 @@ dependencies:
   flutter_alcore:
     git: 
       url: https://github.com/ahsai001/flutter_alcore.git
-      ref: main
+      ref: 3aa816d841cce4a77ed577e4af9f6527da0c3913
+  # flutter_alcore:
+  #   path:  ../flutter_alcore
 
   flutter_bloc: ^8.0.1
   csv: ^5.0.1
@@ -57,6 +59,8 @@ dependencies:
   firebase_auth: ^4.8.0
   cloud_firestore: ^4.9.0
   flutter_timer_countdown: ^1.0.7
+  scroll_to_hide: ^2.1.0
+  flutter_svg: ^2.0.9
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +76,9 @@ dev_dependencies:
   flutter_native_splash: ^2.2.9
   flutter_launcher_icons: ^0.11.0
 
+dependency_overrides:
+  win32: any
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -86,6 +93,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/images/menu/
     - assets/raw/
 
   # An image asset can refer to one or more resolution-specific "variants", see
