@@ -38,7 +38,7 @@ dependencies:
   flutter_alcore:
     git: 
       url: https://github.com/ahsai001/flutter_alcore.git
-      ref: 3aa816d841cce4a77ed577e4af9f6527da0c3913
+      ref: 9a181c111ecb018df94bb47fe5aacfb46f033f31
   # flutter_alcore:
   #   path:  ../flutter_alcore
 
@@ -107,7 +107,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: usmani
+      fonts:
+        - asset: assets/fonts/usmani.otf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
